@@ -1,9 +1,17 @@
 import Header from "./header";
 import styles from "./index.module.less";
 import { Row, Col, Card, Icon } from "ant-design-vue";
+import microApp from "@micro-zoe/micro-app";
 
 export default {
   name: "PageIntroduce",
+
+  mounted() {
+    // 获取全局数据
+    const globalData = microApp.getGlobalData();
+    console.log("全局数据:", globalData);
+  },
+
   render() {
     return (
       <div>
