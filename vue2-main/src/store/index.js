@@ -4,9 +4,15 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    profile: {},
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    SET_PROFILE(state, payload) {
+      state.profile = payload;
+    },
+  },
   actions: {},
   modules: {},
 });

@@ -31,6 +31,51 @@
   align-items: center;
 }
 
+// 新增样式 - 用户区域
+.userSection {
+  display: flex;
+  align-items: center;
+}
+
+.messageIcon {
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-right: 16px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+.userName {
+  margin-right: 8px;
+  font-size: 14px;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.avatar {
+  background-color: #1890ff;
+}
+
+// 原有样式保持不变
 .content {
   padding-top: 64px;
   min-height: calc(100vh - 64px);

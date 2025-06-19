@@ -1,15 +1,26 @@
-import Header from "./header";
+import Header from "@/components/Header";
 import styles from "./index.module.less";
 import { Row, Col, Card, Icon } from "ant-design-vue";
-import microApp from "@micro-zoe/micro-app";
+
+import { mapMutations } from "vuex";
+import { getProfile } from "@/service";
 
 export default {
   name: "PageIntroduce",
 
   mounted() {
-    // 获取全局数据
-    const globalData = microApp.getGlobalData();
-    console.log("全局数据:", globalData);
+    this.fetchGetProfile();
+  },
+
+  methods: {
+    ...mapMutations({
+      setProfile: "SET_PROFILE",
+    }),
+    fetchGetProfile() {
+      return getProfile().then((res) => {
+        this.setProfile(res);
+      });
+    },
   },
 
   render() {

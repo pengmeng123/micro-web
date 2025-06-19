@@ -1,7 +1,11 @@
 import styles from "./index.module.less";
 import { Form, Input, Button, Icon, Divider } from "ant-design-vue";
-import Header from "../Introduce/header";
+import Header from "@/components/Header";
 import microApp from "@micro-zoe/micro-app";
+import Cookies from "js-cookie";
+import { CRMSESSID } from "@/config";
+
+const token = "d4fd6d8159594264bf71bb8c663ce045";
 
 export default {
   name: "PageLogin",
@@ -20,8 +24,9 @@ export default {
           console.log("登录信息:", values);
           setTimeout(() => {
             this.loading = false;
+            Cookies.set(CRMSESSID, token);
             microApp.setGlobalData({
-              token: "ce3885e2743e4432a651ddd381bc0b43",
+              token,
             });
             this.$message.success("登录成功");
             // 登录成功后跳转

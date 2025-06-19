@@ -1,4 +1,16 @@
+import Cookies from "js-cookie";
+import { CRMSESSID } from "@/config";
+import microApp from "@micro-zoe/micro-app";
+
 export default {
+  mounted() {
+    const token = Cookies.get(CRMSESSID);
+    if (token) {
+      microApp.setGlobalData({
+        token,
+      });
+    }
+  },
   render() {
     return (
       <div id="app">
