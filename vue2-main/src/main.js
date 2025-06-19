@@ -3,7 +3,7 @@ import App from "./App";
 import router from "./router";
 import store from "./store";
 import microApp from "@micro-zoe/micro-app";
-import "../public-path";
+// import "../public-path";
 
 microApp.start();
 
