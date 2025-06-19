@@ -3,6 +3,7 @@ import MicroImage from "./components/micro-image";
 import "./App.css";
 
 function App() {
+  console.log("react-child-window---", window.globalApp);
   return (
     <div className="App">
       <MicroImage src={logo} />

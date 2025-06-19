@@ -751,6 +751,7 @@ module.exports = function (webpackEnv) {
     // our own hints via the FileSizeReporter
     performance: false,
     devServer: {
+      port: 5002,
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
