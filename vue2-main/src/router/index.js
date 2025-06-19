@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Introduce from "../components/Introduce";
 import Login from "../components/Login";
+import Customer from "../views/Customer";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,14 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/customer",
+    name: "Customer",
+    component: Customer,
+    meta: {
+      layout: "default",
+    },
   },
 ];
 

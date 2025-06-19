@@ -2,26 +2,8 @@ import Header from "@/components/Header";
 import styles from "./index.module.less";
 import { Row, Col, Card, Icon } from "ant-design-vue";
 
-import { mapMutations } from "vuex";
-import { getProfile } from "@/service";
-
 export default {
   name: "PageIntroduce",
-
-  mounted() {
-    this.fetchGetProfile();
-  },
-
-  methods: {
-    ...mapMutations({
-      setProfile: "SET_PROFILE",
-    }),
-    fetchGetProfile() {
-      return getProfile().then((res) => {
-        this.setProfile(res);
-      });
-    },
-  },
 
   render() {
     return (
