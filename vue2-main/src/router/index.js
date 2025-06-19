@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Introduce from "../components/Introduce";
 import Login from "../components/Login";
 import Customer from "../views/Customer";
+import Opportunity from "../views/Opportunity";
+import Contact from "../views/Contact";
 
 Vue.use(VueRouter);
 
@@ -21,6 +23,22 @@ const routes = [
     path: "/customer",
     name: "Customer",
     component: Customer,
+    meta: {
+      layout: "default",
+    },
+  },
+  {
+    path: "/opportunity",
+    name: "Opportunity",
+    component: Opportunity,
+    meta: {
+      layout: "default",
+    },
+  },
+  {
+    path: "/contact",
+    name: "Contact",
+    component: Contact,
     meta: {
       layout: "default",
     },
