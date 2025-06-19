@@ -2,6 +2,9 @@ import Vue from "vue";
 import App from "./App";
 import router from "./router";
 import store from "./store";
+import microApp from "@micro-zoe/micro-app";
+
+microApp.start();
 
 Vue.config.productionTip = false;
 

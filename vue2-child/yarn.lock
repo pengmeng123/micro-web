@@ -957,6 +957,11 @@
   resolved "https://registry.npmmirror.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.5.tgz#4fc56c15c580b9adb7dc3c333a134e540b44bfb1"
   integrity sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==
 
+"@micro-zoe/micro-app@^1.0.0-rc.26":
+  version "1.0.0-rc.26"
+  resolved "https://registry.npmmirror.com/@micro-zoe/micro-app/-/micro-app-1.0.0-rc.26.tgz#5531252dc4af3b5087d373be3ab8d46d26af0dd3"
+  integrity sha512-3et9FXPAhsQPHaZb/HhZxLiWjUQ07V02me5KfPR0ggLs8ewM1QUbFiZjtfoZ1qXdkqeCazayVnSSxX3hdA33pw==
+
 "@nicolo-ribaudo/eslint-scope-5-internals@5.1.1-v1":
   version "5.1.1-v1"
   resolved "https://registry.npmmirror.com/@nicolo-ribaudo/eslint-scope-5-internals/-/eslint-scope-5-internals-5.1.1-v1.tgz#dbf733a965ca47b1973177dc0bb6c889edcfb129"

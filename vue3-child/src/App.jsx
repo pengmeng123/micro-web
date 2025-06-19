@@ -11,7 +11,12 @@ export default defineComponent({
   },
   render() {
     return (
-      <div>
+      <div
+        style={{
+          background: "#eee",
+        }}
+      >
+        <div>Vue3-child 子应用</div>
         dsfsdsdfsdffdf==={this.name}
         <HelloWorld />
       </div>
