@@ -1,6 +1,6 @@
 import styles from "./index.module.less";
 import Header from "@/components/Header";
-import { Layout, Menu, Icon, Breadcrumb } from "ant-design-vue";
+import { Layout, Menu, Icon } from "ant-design-vue";
 import { mapState } from "vuex";
 import { menuOptions, nameMap } from "@/config";
 
@@ -121,22 +121,6 @@ export default {
 
           {/* 右侧内容区 */}
           <Layout class={styles.contentLayout}>
-            {/* 面包屑导航 */}
-            <div class={styles.breadcrumb}>
-              <Breadcrumb>
-                <Breadcrumb.Item>
-                  <Icon type="home" />
-                  <span>主应用</span>
-                </Breadcrumb.Item>
-                {this.breadcrumbItems.map((item) => (
-                  <Breadcrumb.Item key={item.path}>
-                    {item.breadcrumbName}
-                  </Breadcrumb.Item>
-                ))}
-              </Breadcrumb>
-            </div>
-
-            {/* 内容区 */}
             <Content class={styles.content}>
               <router-view />
             </Content>
