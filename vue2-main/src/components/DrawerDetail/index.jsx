@@ -23,18 +23,21 @@ export default {
   },
 
   render() {
-    const { params } = this;
+    const { title, microName, microUrl, ...restParams } = this.params;
     return (
       <a-drawer
         width={800}
-        title={params.title}
+        title={title}
         placement="right"
         visible={this.visible}
         onClose={this.onClose}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <micro-app
+          name={microName}
+          iframe
+          url={microUrl}
+          data={restParams}
+        ></micro-app>
       </a-drawer>
     );
   },

@@ -33,3 +33,10 @@ export const nameMap = {
   contact: "联系人管理",
   opportunity: "商机管理",
 };
+
+export const MICRO_MAPPER = {
+  VUE3_VITE_CHILD: {
+    name: "vue3-vite-child",
+    host: "http://localhost:5003",
+  },
+};

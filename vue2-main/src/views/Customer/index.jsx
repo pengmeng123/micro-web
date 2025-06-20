@@ -4,6 +4,7 @@ import { customerSearch } from "@/service";
 import PageLoading from "@/components/Loading";
 import { uniq, compact } from "lodash";
 import { openDrawerDetail } from "@/hooks";
+import { MICRO_MAPPER } from "@/config";
 
 export default {
   name: "PageCustomer",
@@ -64,6 +65,7 @@ export default {
       window.microApp?.dispatch({
         type: "viewCustomerDetail",
         data: record,
+        url: "http://localhost:5003/customer-detail",
       });
     },
   },
@@ -79,6 +81,8 @@ export default {
               openDrawerDetail({
                 title: "客户详情",
                 customerId: record.customerId,
+                microName: MICRO_MAPPER.VUE3_VITE_CHILD.name,
+                microUrl: `${MICRO_MAPPER.VUE3_VITE_CHILD.host}/customer-detail`,
               });
             }}
           >
