@@ -4,6 +4,7 @@ import microApp from "@micro-zoe/micro-app";
 import { mapMutations } from "vuex";
 import { getProfile } from "@/service";
 import PageLoading from "@/components/Loading";
+import zhCN from "ant-design-vue/lib/locale-provider/zh_CN";
 
 export default {
   data() {
@@ -43,7 +44,13 @@ export default {
     const Layout = LAYOUT_MAPPING[this.$route.meta?.layout || "blank"];
     return (
       <div id="app">
-        {this.isLoading ? <PageLoading fullScreen /> : <Layout />}
+        {this.isLoading ? (
+          <PageLoading fullScreen />
+        ) : (
+          <a-locale-provider locale={zhCN}>
+            <Layout />
+          </a-locale-provider>
+        )}
         {/* <micro-app name="vue3-child" url="http://localhost:8081/"></micro-app> */}
         {/* <micro-app name="react-child" url="http://localhost:3001/"></micro-app>
         <micro-app
