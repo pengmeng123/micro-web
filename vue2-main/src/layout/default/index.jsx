@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import { Layout, Menu, Icon } from "ant-design-vue";
 import { mapState } from "vuex";
 import { menuOptions, nameMap } from "@/config";
+import { PromiseDialogsWrapper } from "vue-promise-dialogs";
 
 export default {
   name: "DefaultLayout",
@@ -79,7 +80,6 @@ export default {
     return (
       <div class={styles.container}>
         <Header />
-
         <Layout class={styles.mainLayout}>
           {/* 左侧菜单 */}
           <Sider
@@ -126,6 +126,7 @@ export default {
             </Content>
           </Layout>
         </Layout>
+        <PromiseDialogsWrapper />
       </div>
     );
   },

@@ -3,6 +3,7 @@ import styles from "./index.module.less";
 import { customerSearch } from "@/service";
 import PageLoading from "@/components/Loading";
 import { uniq, compact } from "lodash";
+import { openDrawerDetail } from "@/hooks";
 
 export default {
   name: "PageCustomer",
@@ -73,7 +74,16 @@ export default {
         title: "客户名称",
         width: 260,
         customRender: (text, record) => (
-          <a onClick={() => this.handleViewDetail(record)}>{record.name}</a>
+          <a
+            onClick={() => {
+              openDrawerDetail({
+                title: "客户详情",
+                customerId: record.customerId,
+              });
+            }}
+          >
+            {record.name}
+          </a>
         ),
       },
       {
