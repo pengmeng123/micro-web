@@ -148,15 +148,6 @@ export default {
               />
             )}
           </Card>
-
-          {/* 这里可以添加一个隐藏的子应用容器，用于后续交互 */}
-          <div id="customerDetailContainer" style="display: none;">
-            <micro-app
-              name="customer-detail"
-              url="http://localhost:8081/customer-detail"
-              data={{ selectedCustomer: null }}
-            ></micro-app>
-          </div>
         </div>
       </div>
     );

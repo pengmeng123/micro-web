@@ -23,14 +23,14 @@ export default {
   },
 
   render() {
-    const { title, microName, microUrl, ...restParams } = this.params;
+    const { microName, microUrl, ...restParams } = this.params;
     return (
       <a-drawer
         width={800}
-        title={title}
         placement="right"
         visible={this.visible}
         onClose={this.onClose}
+        bodyStyle={{ padding: 0 }}
       >
         <micro-app
           name={microName}
