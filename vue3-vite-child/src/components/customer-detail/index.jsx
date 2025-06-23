@@ -1,4 +1,7 @@
 import { defineComponent, onMounted, ref } from "vue";
+import Header from ".//header";
+import CustomerTab from "./customer-tab";
+import ContractTab from "./contract-tab";
 
 const TAB_OPTIONS = [
   {
@@ -14,6 +17,10 @@ const TAB_OPTIONS = [
 export default defineComponent({
   setup() {
     const activeKey = ref(TAB_OPTIONS[0].key);
+    const comMapper = ref({
+      customer: () => <CustomerTab />,
+      contract: () => <ContractTab />,
+    });
     onMounted(() => {
       if (window.microApp) {
         const data = window.microApp.getData();
@@ -28,9 +35,11 @@ export default defineComponent({
     return {
       activeKey,
       handleChange,
+      comMapper,
     };
   },
   render() {
+    const { comMapper } = this;
     return (
       <div>
         <a-tabs
@@ -42,8 +51,8 @@ export default defineComponent({
             <a-tab-pane key={v.key} tab={v.label}></a-tab-pane>
           ))}
         </a-tabs>
-        <div>繁創電子科技（香港）有限公司</div>
-        <div>{this.activeKey}</div>
+        <Header />
+        <div>{comMapper[this.activeKey]()}</div>
       </div>
     );
   },
