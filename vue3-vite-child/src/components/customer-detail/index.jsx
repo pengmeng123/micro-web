@@ -25,7 +25,7 @@ export default defineComponent({
     onMounted(() => {
       if (window.microApp) {
         const data = window.microApp.getData();
-        console.log("f[[===", data);
+        console.log("f[[===1", data);
       }
     });
 
