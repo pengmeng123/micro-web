@@ -2,6 +2,7 @@ import { defineComponent, onMounted, ref } from "vue";
 import Header from ".//header";
 import CustomerTab from "./customer-tab";
 import ContractTab from "./contract-tab";
+import styles from "./index.module.less";
 
 const TAB_OPTIONS = [
   {
@@ -39,20 +40,24 @@ export default defineComponent({
     };
   },
   render() {
-    const { comMapper } = this;
+    const { comMapper, activeKey } = this;
     return (
       <div>
-        <a-tabs
-          size={"large"}
-          activeKey={this.activeKey}
-          onChange={this.handleChange}
-        >
-          {TAB_OPTIONS.map((v) => (
-            <a-tab-pane key={v.key} tab={v.label}></a-tab-pane>
-          ))}
-        </a-tabs>
-        <Header />
-        <div>{comMapper[this.activeKey]()}</div>
+        <div>
+          <div class={styles.tabs}>
+            <a-tabs
+              size={"large"}
+              activeKey={activeKey}
+              onChange={this.handleChange}
+            >
+              {TAB_OPTIONS.map((v) => (
+                <a-tab-pane key={v.key} tab={v.label}></a-tab-pane>
+              ))}
+            </a-tabs>
+          </div>
+          <Header />
+        </div>
+        <div>{comMapper[activeKey]()}</div>
       </div>
     );
   },
