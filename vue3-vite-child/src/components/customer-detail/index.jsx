@@ -31,6 +31,7 @@ export default defineComponent({
       contract: (record) => <ContractTab record={record} />,
     });
     const record = ref({});
+    const loading = ref(true);
 
     onMounted(() => {
       if (window.microApp) {
@@ -55,9 +56,14 @@ export default defineComponent({
     });
 
     const fetchCustomerDetail = (customerId) => {
-      customerDetail(customerId).then((res) => {
-        record.value = res.data;
-      });
+      loading.value = true;
+      customerDetail(customerId)
+        .then((res) => {
+          record.value = res.data;
+        })
+        .finally(() => {
+          loading.value = false;
+        });
     };
 
     const handleChange = (key) => {
@@ -69,13 +75,25 @@ export default defineComponent({
       handleChange,
       comMapper,
       record,
+      loading,
     };
   },
   render() {
     const { comMapper, activeKey, record } = this;
+    if (this.loading) {
+      return (
+        <div style={{ padding: "20px 15px 15px" }}>
+          <a-skeleton />
+          <a-skeleton />
+          <a-skeleton />
+          <a-skeleton />
+          <a-skeleton />
+        </div>
+      );
+    }
     return (
       <div>
-        <div>
+        <div class={styles.fixedHeader}>
           <div class={styles.tabs}>
             <a-tabs
               size={"large"}
@@ -87,6 +105,7 @@ export default defineComponent({
               ))}
             </a-tabs>
           </div>
+          <a-alert message="这是vue3+vite_child子应用的客户详情页" banner />
           <Header record={record} />
         </div>
         <div>{comMapper[activeKey](record)}</div>

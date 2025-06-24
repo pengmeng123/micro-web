@@ -1,57 +1,88 @@
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, reactive, ref } from "vue";
+import { customerContractSearch } from "@/service";
 import styles from "./index.module.less";
+import { textAreaProps } from "ant-design-vue/es/input/inputProps";
 
 export default defineComponent({
-  setup() {
+  props: {
+    record: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  setup(props) {
     // 表格列定义
     const columns = [
       {
-        title: "姓名",
-        dataIndex: "name",
-        key: "name",
+        title: "合同编号",
+        customRender: ({ record }) => {
+          return <a>{record?.code}</a>;
+        },
       },
       {
-        title: "年龄",
-        dataIndex: "age",
-        key: "age",
+        title: "合同名称",
+        customRender: ({ record }) => {
+          return <span>{record?.name}</span>;
+        },
       },
       {
-        title: "地址",
-        dataIndex: "address",
-        key: "address",
+        title: "合同金额",
+        customRender: ({ record }) => {
+          return <span>¥{record?.amount || 0}</span>;
+        },
       },
     ];
 
-    // 表格数据
-    const data = [
-      {
-        key: "1",
-        name: "张三",
-        age: 32,
-        address: "北京市朝阳区",
-      },
-      {
-        key: "2",
-        name: "李四",
-        age: 28,
-        address: "上海市浦东新区",
-      },
-      {
-        key: "3",
-        name: "王五",
-        age: 25,
-        address: "广州市天河区",
-      },
-    ];
+    const dataSource = ref([]);
+    const customerId = ref(undefined);
+    const loading = ref(false);
 
-    return { columns, data };
+    const pagination = reactive({
+      current: 1,
+      pageSize: 10,
+      total: 0,
+    });
+
+    onMounted(() => {
+      console.log("contract-tab mounted");
+      customerId.value = 5240688 || props.record.customerId;
+      fetchcustomerContractSearch({
+        pageIndex: pagination.current,
+        pageSize: pagination.pageSize,
+        customerIds: [customerId.value],
+      });
+    });
+
+    const fetchcustomerContractSearch = (data) => {
+      loading.value = true;
+      return customerContractSearch(data)
+        .then((res) => {
+          dataSource.value = res.data;
+          pagination.current = res.page?.current;
+          pagination.total = res.page?.total;
+        })
+        .finally(() => {
+          loading.value = false;
+        });
+    };
+
+    const handleTableChange = (pagination, filters, sorter) => {
+      fetchcustomerContractSearch({
+        pageIndex: pagination.current,
+        pageSize: pagination.pageSize,
+        customerIds: [customerId.value],
+      });
+    };
+
+    return { columns, pagination, dataSource, handleTableChange, loading };
   },
   render() {
+    const { pagination, dataSource, handleTableChange } = this;
     return (
       <div class={styles.container}>
         <a-card
           bordered={false}
-          title={"共14条"}
+          title={`共${pagination.total || 0}条`}
           bodyStyle={{
             padding: "24px 15px",
             boxShadow: "none",
@@ -62,11 +93,14 @@ export default defineComponent({
           }}
         >
           <a-table
+            rowKey="contractId"
             size="small"
+            loading={this.loading}
             columns={this.columns}
-            dataSource={this.data}
+            dataSource={dataSource}
             bordered
-            pagination={{ pageSize: 10 }}
+            pagination={pagination.total > 10 ? pagination : false}
+            onChange={handleTableChange}
           />
         </a-card>
       </div>

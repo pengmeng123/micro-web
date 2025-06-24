@@ -79,9 +79,14 @@ export default {
             onClick={() => {
               openDrawerDetail({
                 title: "客户详情",
+                iframe: true,
                 customerId: record.customerId,
                 microName: MICRO_MAPPER.VUE3_VITE_CHILD.name,
                 microUrl: `${MICRO_MAPPER.VUE3_VITE_CHILD.host}/customer-detail`,
+                refresh: () => {
+                  console.log("------");
+                  this.fetchCustomers();
+                },
               });
             }}
           >
