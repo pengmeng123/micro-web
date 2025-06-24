@@ -36,7 +36,11 @@ export default {
           name={microName}
           iframe
           url={microUrl}
-          data={restParams}
+          data={{
+            ...restParams,
+            visible: this.visible,
+            token: "d4fd6d8159594264bf71bb8c663ce045",
+          }}
         ></micro-app>
       </a-drawer>
     );

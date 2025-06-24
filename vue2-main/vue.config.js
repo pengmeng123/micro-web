@@ -6,6 +6,7 @@ module.exports = defineConfig({
     proxy: {
       "^/qcc": {
         target: "http://z.test.greatld.com",
+        changeOrigin: true,
         xfwd: false,
       },
     },

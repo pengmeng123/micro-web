@@ -4,6 +4,7 @@ import CustomerTab from "./customer-tab";
 import ContractTab from "./contract-tab";
 import styles from "./index.module.less";
 import { customerDetail } from "@/service";
+import Cookies from "js-cookie";
 
 const TAB_OPTIONS = [
   {
@@ -17,6 +18,12 @@ const TAB_OPTIONS = [
 ];
 
 export default defineComponent({
+  props: {
+    visible: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup() {
     const activeKey = ref(TAB_OPTIONS[0].key);
     const comMapper = ref({
@@ -28,11 +35,21 @@ export default defineComponent({
     onMounted(() => {
       if (window.microApp) {
         const data = window.microApp.getData();
-        console.log("f[[===1", data);
+        console.log("微前端全局数据:", data);
+
+        // 设置 Cookie，确保能在代理请求中传递
+        const token = data?.token || "d4fd6d8159594264bf71bb8c663ce045";
+        Cookies.set("CRMSESSID", token);
+
         if (data?.customerId) {
-          fetchCustomerDetail(data?.customerId);
+          fetchCustomerDetail(data.customerId);
+        } else {
+          fetchCustomerDetail(1142433);
         }
       } else {
+        // 单独访问时，使用硬编码的 token（仅用于测试）
+        const token = "d4fd6d8159594264bf71bb8c663ce045";
+        Cookies.set("CRMSESSID", token);
         fetchCustomerDetail(1142433);
       }
     });

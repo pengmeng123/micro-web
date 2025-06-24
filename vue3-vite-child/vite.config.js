@@ -12,11 +12,12 @@ export default defineConfig({
   },
   server: {
     port: 5003,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
+    cors: {
+      origin: true, // 允许跨域
+      credentials: true, // 允许携带cookie
     },
     proxy: {
-      "^/qcc": {
+      "/qcc": {
         target: "http://z.test.greatld.com",
         changeOrigin: true,
         secure: false,

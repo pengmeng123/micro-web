@@ -35,7 +35,6 @@ export default {
         pageSize: this.pagination.pageSize,
       })
         .then((res) => {
-          console.log(res);
           this.dataSource = res.data || [];
           this.pagination.total = res?.page?.total || 0;
         })
