@@ -1,0 +1,28 @@
+.container {
+  :global {
+    .vue3-vite-child-ant-card {
+      box-shadow: none;
+    }
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  td {
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    text-align: left;
+  }
+
+  td:nth-child(odd) {
+    background-color: #f9f9f9;
+    font-weight: normal;
+    color: #666;
+  }
+
+  td:nth-child(even) {
+    background-color: #ffffff;
+    color: #333;
+  }
+}

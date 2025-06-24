@@ -3,11 +3,21 @@ import { DeleteOutlined } from "@ant-design/icons-vue";
 import styles from "./index.module.less";
 
 export default defineComponent({
+  props: {
+    record: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+
   render() {
+    const { record } = this;
+    const userCustomers =
+      record.userCustomers?.filter((v) => v.roleId === 4) || [];
     return (
       <div class={styles.container}>
         <div class={styles.title}>
-          <div>繁創電子科技（香港）有限公司</div>
+          <div>{record.name}</div>
           <div class={styles.actions}>
             <a-button>
               <DeleteOutlined />
@@ -17,8 +27,15 @@ export default defineComponent({
         </div>
         <div>
           <span class={styles.label}>客户编号：</span>
-          CU0005240688&nbsp;&nbsp;&nbsp;&nbsp;
-          <span class={styles.label}>负责人：</span>小明&nbsp;&nbsp;
+          {record.code}&nbsp;&nbsp;&nbsp;&nbsp;
+          <span class={styles.label}>负责人：</span>
+          {userCustomers.map((v, index) => (
+            <span>
+              <a>{v.name}</a>
+              {index !== userCustomers.length - 1 && <span>, </span>}
+            </span>
+          ))}
+          &nbsp;&nbsp;
         </div>
       </div>
     );

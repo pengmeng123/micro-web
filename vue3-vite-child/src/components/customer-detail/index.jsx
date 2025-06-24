@@ -3,6 +3,7 @@ import Header from ".//header";
 import CustomerTab from "./customer-tab";
 import ContractTab from "./contract-tab";
 import styles from "./index.module.less";
+import { customerDetail } from "@/service";
 
 const TAB_OPTIONS = [
   {
@@ -10,7 +11,7 @@ const TAB_OPTIONS = [
     key: "customer",
   },
   {
-    label: "合同详情",
+    label: "合同订单",
     key: "contract",
   },
 ];
@@ -19,15 +20,28 @@ export default defineComponent({
   setup() {
     const activeKey = ref(TAB_OPTIONS[0].key);
     const comMapper = ref({
-      customer: () => <CustomerTab />,
-      contract: () => <ContractTab />,
+      customer: (record) => <CustomerTab record={record} />,
+      contract: (record) => <ContractTab record={record} />,
     });
+    const record = ref({});
+
     onMounted(() => {
       if (window.microApp) {
         const data = window.microApp.getData();
         console.log("f[[===1", data);
+        if (data?.customerId) {
+          fetchCustomerDetail(data?.customerId);
+        }
+      } else {
+        fetchCustomerDetail(1142433);
       }
     });
+
+    const fetchCustomerDetail = (customerId) => {
+      customerDetail(customerId).then((res) => {
+        record.value = res.data;
+      });
+    };
 
     const handleChange = (key) => {
       activeKey.value = key;
@@ -37,10 +51,11 @@ export default defineComponent({
       activeKey,
       handleChange,
       comMapper,
+      record,
     };
   },
   render() {
-    const { comMapper, activeKey } = this;
+    const { comMapper, activeKey, record } = this;
     return (
       <div>
         <div>
@@ -55,9 +70,9 @@ export default defineComponent({
               ))}
             </a-tabs>
           </div>
-          <Header />
+          <Header record={record} />
         </div>
-        <div>{comMapper[activeKey]()}</div>
+        <div>{comMapper[activeKey](record)}</div>
       </div>
     );
   },

@@ -15,5 +15,12 @@ export default defineConfig({
     headers: {
       "Access-Control-Allow-Origin": "*",
     },
+    proxy: {
+      "^/qcc": {
+        target: "http://z.test.greatld.com",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 });
