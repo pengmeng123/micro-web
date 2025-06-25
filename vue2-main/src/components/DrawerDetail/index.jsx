@@ -38,7 +38,6 @@ export default {
     bindMicroAppEvents() {
       const { microName } = this.params;
       if (microName) {
-        this.unbindMicroAppEvents();
         microApp.addDataListener(microName, this.handleMicroAppData);
       }
     },
@@ -47,6 +46,9 @@ export default {
       if (microName) {
         microApp?.removeDataListener(microName, this.handleMicroAppData);
       }
+    },
+    handleDataChange(data) {
+      console.log("handleDataChange", data);
     },
   },
 
@@ -61,6 +63,7 @@ export default {
         bodyStyle={{ padding: 0 }}
       >
         <micro-app
+          clear-data
           name={microName}
           iframe={iframe}
           url={microUrl}
@@ -69,6 +72,7 @@ export default {
             visible: this.visible,
             token: "d4fd6d8159594264bf71bb8c663ce045",
           }}
+          onDatachange={this.handleDataChange}
         ></micro-app>
       </a-drawer>
     );
