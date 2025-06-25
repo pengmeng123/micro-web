@@ -84,7 +84,6 @@ export default {
                 microName: MICRO_MAPPER.VUE3_VITE_CHILD.name,
                 microUrl: `${MICRO_MAPPER.VUE3_VITE_CHILD.host}/customer-detail`,
                 refresh: () => {
-                  console.log("------");
                   this.fetchCustomers();
                 },
               });
@@ -111,7 +110,24 @@ export default {
         width: 165,
         customRender: (text, record) => {
           const users = record.userCustomers?.filter((v) => v.roleId === 4);
-          return users?.length > 0 ? <a>{users[0].name}</a> : "-";
+          return users?.length > 0 ? (
+            <a
+              onClick={() => {
+                openDrawerDetail({
+                  title: "个人详情",
+                  width: 400,
+                  iframe: true,
+                  userId: users[0].userId,
+                  microName: MICRO_MAPPER.VUE3_VITE_CHILD.name,
+                  microUrl: `${MICRO_MAPPER.VUE3_VITE_CHILD.host}/personal-detail`,
+                });
+              }}
+            >
+              {users[0].name}
+            </a>
+          ) : (
+            "-"
+          );
         },
       },
 

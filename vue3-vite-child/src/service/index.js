@@ -11,3 +11,7 @@ export const customerContractSearch = (data) => {
 export const deleteCustomer = (customerId) => {
   return Http.delete(`/qcc/kzz/crm/v2/customer/${customerId}`);
 };
+
+export const getPersonalDetail = (userId) => {
+  return Http.get(`/qcc/kzz/crm/dashboard/userInfo/${userId}`, {});
+};

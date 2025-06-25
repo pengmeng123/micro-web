@@ -62,10 +62,16 @@ export default {
   },
 
   render() {
-    const { microName, microUrl, iframe = false, ...restParams } = this.params;
+    const {
+      microName,
+      microUrl,
+      width = 800,
+      iframe = false,
+      ...restParams
+    } = this.params;
     return (
       <a-drawer
-        width={800}
+        width={width}
         placement="right"
         visible={this.visible}
         onClose={this.onClose}

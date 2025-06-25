@@ -1,0 +1,253 @@
+.personalDetailContainer {
+  background: #ffffff;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.userCard {
+  width: 100%;
+  height: 100%;
+}
+
+.cardHeader {
+  padding: 24px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+  background: #ffffff;
+}
+
+.avatarSection {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #e2e8f0;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    border-color: #667eea;
+  }
+}
+
+.statusBadge {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  padding: 3px 6px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  border: 2px solid white;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.statusActive {
+  background: #10b981;
+  color: white;
+}
+
+.statusInactive {
+  background: #ef4444;
+  color: white;
+}
+
+.basicInfo {
+  text-align: center;
+}
+
+.userName {
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.department {
+  margin: 0;
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.cardBody {
+  padding: 24px;
+}
+
+.infoGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+  transition: all 0.3s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: #f8fafc;
+    padding-left: 8px;
+    margin-left: -8px;
+    border-radius: 6px;
+  }
+}
+
+.infoIcon {
+  width: 32px;
+  height: 32px;
+  background: #667eea;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    color: white;
+  }
+}
+
+.infoContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.infoLabel {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.infoValue {
+  font-size: 16px;
+  color: #1e293b;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+/* 响应式设计 */
+@media (max-width: 640px) {
+  .personalDetailContainer {
+    padding: 16px;
+  }
+
+  .userCard {
+    max-width: 100%;
+  }
+
+  .cardHeader {
+    padding: 24px 16px;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .userName {
+    font-size: 24px;
+  }
+
+  .cardBody {
+    padding: 24px 16px;
+  }
+
+  .infoItem {
+    padding: 12px;
+  }
+
+  .infoIcon {
+    width: 36px;
+    height: 36px;
+    margin-right: 12px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .infoValue {
+    font-size: 14px;
+  }
+}
+
+/* 暗色主题支持 */
+@media (prefers-color-scheme: dark) {
+  .personalDetailContainer {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  }
+
+  .userCard {
+    background: #1e293b;
+    color: white;
+  }
+
+  .infoItem {
+    background: #334155;
+    border-left-color: #667eea;
+
+    &:hover {
+      background: #475569;
+    }
+  }
+
+  .infoLabel {
+    color: #94a3b8;
+  }
+
+  .infoValue {
+    color: #f1f5f9;
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.userCard {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.infoItem {
+  animation: fadeInUp 0.6s ease-out;
+
+  &:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  &:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  &:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+}
