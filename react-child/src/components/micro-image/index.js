@@ -1,4 +1,4 @@
-function MicroImage({ src }) {
+function MicroImage({ src, width }) {
   const isMicroApp = window.__MICRO_APP_ENVIRONMENT__;
   // 处理图片路径
   let imgSrc = src;
@@ -8,7 +8,7 @@ function MicroImage({ src }) {
     }
   }
 
-  return <img src={imgSrc} alt="" />;
+  return <img width={width} src={imgSrc} alt="" />;
 }
 
 export default MicroImage;
