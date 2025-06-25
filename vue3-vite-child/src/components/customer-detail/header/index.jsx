@@ -2,6 +2,7 @@ import { defineComponent, ref } from "vue";
 import { DeleteOutlined } from "@ant-design/icons-vue";
 import { Modal, message } from "ant-design-vue";
 import { deleteCustomer } from "@/service";
+import PersonalDetail from "@/components/personal-detail";
 import styles from "./index.module.less";
 
 export default defineComponent({
@@ -14,6 +15,8 @@ export default defineComponent({
 
   setup(props) {
     const loading = ref(false);
+    const showPersonalDrawer = ref(false);
+    const currentUserId = ref(undefined);
 
     const handleDelete = () => {
       Modal.confirm({
@@ -43,14 +46,35 @@ export default defineComponent({
       });
     };
 
+    const handlePersonalDrawer = (userId) => {
+      currentUserId.value = userId;
+      showPersonalDrawer.value = true;
+    };
+    const handleClosePersonalDrawer = () => {
+      currentUserId.value = undefined;
+      showPersonalDrawer.value = false;
+    };
+
     return {
       loading,
       handleDelete,
+      handlePersonalDrawer,
+      handleClosePersonalDrawer,
+      showPersonalDrawer,
+      currentUserId,
     };
   },
 
   render() {
-    const { record, loading, handleDelete } = this;
+    const {
+      record,
+      loading,
+      handleDelete,
+      showPersonalDrawer,
+      handlePersonalDrawer,
+      handleClosePersonalDrawer,
+      currentUserId,
+    } = this;
     const userCustomers =
       record.userCustomers?.filter((v) => v.roleId === 4) || [];
 
@@ -71,12 +95,30 @@ export default defineComponent({
           <span class={styles.label}>负责人：</span>
           {userCustomers.map((v, index) => (
             <span key={v.userId}>
-              <a>{v.name}</a>
+              <a
+                onClick={() => {
+                  handlePersonalDrawer(v.userId);
+                }}
+              >
+                {v.name}
+              </a>
               {index !== userCustomers.length - 1 && <span>, </span>}
             </span>
           ))}
           &nbsp;&nbsp;
         </div>
+
+        <a-drawer
+          visible={showPersonalDrawer}
+          placement="right"
+          closable={false}
+          bodyStyle={{
+            padding: 0,
+          }}
+          onClose={handleClosePersonalDrawer}
+        >
+          {showPersonalDrawer && <PersonalDetail userId={currentUserId} />}
+        </a-drawer>
       </div>
     );
   },

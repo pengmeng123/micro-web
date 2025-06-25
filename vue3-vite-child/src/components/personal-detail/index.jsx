@@ -4,17 +4,21 @@ import styles from "./index.module.less";
 import moment from "moment";
 
 export default defineComponent({
-  setup() {
+  props: {
+    userId: {
+      type: Number,
+    },
+  },
+  setup(props) {
     const loading = ref(true);
     const userInfo = ref({});
 
     onMounted(() => {
-      if (window.microApp) {
-        const data = window.microApp.getData();
-        console.log("微前端全局数据:", data);
-        if (data?.userId) {
-          fetchPersonalDetail(data?.userId);
-        }
+      const data = window.microApp?.getData?.();
+      console.log("微前端全局数据:", data);
+      const userId = props.userId || data?.userId;
+      if (userId) {
+        fetchPersonalDetail(userId);
       }
     });
 
@@ -55,7 +59,7 @@ export default defineComponent({
           <div class={styles.cardHeader}>
             <div class={styles.avatarSection}>
               <img
-                src={userInfo.faceimg}
+                src={userInfo.faceimg || userInfo.faceImg}
                 alt="用户头像"
                 class={styles.avatar}
               />
@@ -77,6 +81,7 @@ export default defineComponent({
 
           {/* 详细信息区域 */}
           <div class={styles.cardBody}>
+            <a-alert message="这是vue3+vite_child子应用的用户详情页" banner />
             <div class={styles.infoGrid}>
               <div class={styles.infoItem}>
                 <div class={styles.infoIcon}>
@@ -86,7 +91,7 @@ export default defineComponent({
                 </div>
                 <div class={styles.infoContent}>
                   <span class={styles.infoLabel}>邮箱</span>
-                  <span class={styles.infoValue}>{userInfo.email}</span>
+                  <span class={styles.infoValue}>{userInfo.email || "-"}</span>
                 </div>
               </div>
 
@@ -98,7 +103,7 @@ export default defineComponent({
                 </div>
                 <div class={styles.infoContent}>
                   <span class={styles.infoLabel}>电话</span>
-                  <span class={styles.infoValue}>{userInfo.phone}</span>
+                  <span class={styles.infoValue}>{userInfo.phone || "-"}</span>
                 </div>
               </div>
 
