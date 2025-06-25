@@ -5,6 +5,12 @@ import { Row, Col, Card, Icon } from "ant-design-vue";
 export default {
   name: "PageIntroduce",
 
+  methods: {
+    goHome() {
+      this.$router.push("/customer");
+    },
+  },
+
   render() {
     return (
       <div>
@@ -18,7 +24,7 @@ export default {
               基于 micro-app
               的微前端架构，实现多框架共存与协作，提升开发效率与用户体验
             </p>
-            <a-button type="primary" size="large">
+            <a-button type="primary" size="large" onClick={this.goHome}>
               开始体验
             </a-button>
           </div>

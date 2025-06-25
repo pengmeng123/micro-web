@@ -1,4 +1,5 @@
 import microApp from "@micro-zoe/micro-app";
+import { logout } from "@/utils";
 
 export default {
   name: "DrawerDetail",
@@ -30,9 +31,17 @@ export default {
     },
     handleMicroAppData(data) {
       console.log("来自子应用my-app的数据", data);
-      if (data?.type === "dr:close-refresh") {
-        this.onClose();
-        this.params.refresh?.();
+
+      switch (data?.type) {
+        case "jump-to-login": {
+          logout();
+          break;
+        }
+        case "dr:close-refresh": {
+          this.onClose();
+          this.params.refresh?.();
+          break;
+        }
       }
     },
     bindMicroAppEvents() {
@@ -70,7 +79,6 @@ export default {
           data={{
             ...restParams,
             visible: this.visible,
-            token: "d4fd6d8159594264bf71bb8c663ce045",
           }}
           onDatachange={this.handleDataChange}
         ></micro-app>

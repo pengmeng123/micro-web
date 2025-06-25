@@ -1,8 +1,7 @@
 import Cookies from "js-cookie";
 import { CRMSESSID, LAYOUT_MAPPING } from "@/config";
 import microApp from "@micro-zoe/micro-app";
-import { mapMutations } from "vuex";
-import { getProfile } from "@/service";
+import { mapActions } from "vuex";
 import PageLoading from "@/components/Loading";
 import zhCN from "ant-design-vue/lib/locale-provider/zh_CN";
 
@@ -22,22 +21,16 @@ export default {
   },
 
   mounted() {
-    this.fetchGetProfile();
+    this.init();
   },
 
   methods: {
-    ...mapMutations({
-      setProfile: "SET_PROFILE",
-    }),
-    fetchGetProfile() {
+    ...mapActions(["fetchGetProfile"]),
+    init() {
       this.isLoading = true;
-      return getProfile()
-        .then((res) => {
-          this.setProfile(res);
-        })
-        .finally(() => {
-          this.isLoading = false;
-        });
+      return this.fetchGetProfile().finally(() => {
+        this.isLoading = false;
+      });
     },
   },
   render() {
@@ -51,13 +44,6 @@ export default {
             <Layout />
           </a-locale-provider>
         )}
-        {/* <micro-app name="vue3-child" url="http://localhost:8081/"></micro-app> */}
-        {/* <micro-app name="react-child" url="http://localhost:3001/"></micro-app>
-        <micro-app
-          name="vue3-main"
-          iframe
-          url="http://localhost:5000/"
-        ></micro-app> */}
       </div>
     );
   },

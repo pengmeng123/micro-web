@@ -1,6 +1,7 @@
 import styles from "./index.module.less";
 import { Icon, Avatar, Badge, Dropdown, Menu } from "ant-design-vue";
 import { mapState } from "vuex";
+import { logout } from "@/utils";
 
 export default {
   name: "PageHeader",
@@ -28,10 +29,7 @@ export default {
       // this.$router.push("/messages");
     },
     handleLogout() {
-      this.$store.dispatch("logout").then(() => {
-        this.$message.success("已退出登录");
-        this.$router.push("/login");
-      });
+      logout();
     },
     handleMenuClick({ key }) {
       switch (key) {

@@ -38,19 +38,10 @@ export default defineComponent({
         const data = window.microApp.getData();
         console.log("微前端全局数据:", data);
 
-        // 设置 Cookie，确保能在代理请求中传递
-        const token = data?.token || "d4fd6d8159594264bf71bb8c663ce045";
-        Cookies.set("CRMSESSID", token);
-
         if (data?.customerId) {
           fetchCustomerDetail(data.customerId);
-        } else {
-          fetchCustomerDetail(1142433);
         }
       } else {
-        // 单独访问时，使用硬编码的 token（仅用于测试）
-        const token = "d4fd6d8159594264bf71bb8c663ce045";
-        Cookies.set("CRMSESSID", token);
         fetchCustomerDetail(1142433);
       }
     });

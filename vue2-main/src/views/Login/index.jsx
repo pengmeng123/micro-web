@@ -30,7 +30,7 @@ export default {
             });
             this.$message.success("登录成功");
             // 登录成功后跳转
-            this.$router.push("/");
+            window.location.href = "/customer";
           }, 1500);
         }
       });
