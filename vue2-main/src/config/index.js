@@ -37,6 +37,6 @@ export const nameMap = {
 export const MICRO_MAPPER = {
   VUE3_VITE_CHILD: {
     name: "vue3-vite-child",
-    host: "http://localhost:5003",
+    host: "http://z.local.greatld.com:5003",
   },
 };

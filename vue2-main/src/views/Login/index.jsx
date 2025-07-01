@@ -1,11 +1,8 @@
 import styles from "./index.module.less";
 import { Form, Input, Button, Icon, Divider } from "ant-design-vue";
 import Header from "@/components/Header";
-import microApp from "@micro-zoe/micro-app";
-import Cookies from "js-cookie";
-import { CRMSESSID } from "@/config";
-
-const token = "d4fd6d8159594264bf71bb8c663ce045";
+import { login } from "@/service";
+import Gt4 from "@/components/Gt4";
 
 export default {
   name: "PageLogin",
@@ -20,19 +17,21 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          this.loading = true;
-          console.log("登录信息:", values);
-          setTimeout(() => {
-            this.loading = false;
-            Cookies.set(CRMSESSID, token);
-            microApp.setGlobalData({
-              token,
-            });
-            this.$message.success("登录成功");
-            // 登录成功后跳转
-            window.location.href = "/customer";
-          }, 1500);
+          this.$refs.gt4Dom.showCaptcha({
+            ...values,
+            redirectUrl: "/",
+          });
         }
+      });
+    },
+    onValidatedSuccess(params) {
+      this.loading = true;
+      login(params).then((res) => {
+        console.log("登录结果:", res);
+        this.loading = false;
+        this.$message.success("登录成功");
+        // 登录成功后跳转
+        window.location.href = "/customer";
       });
     },
   },
@@ -49,7 +48,7 @@ export default {
 
             <Form onSubmit={this.handleSubmit} class={styles.loginForm}>
               <Form.Item>
-                {getFieldDecorator("phone", {
+                {getFieldDecorator("mobile", {
                   rules: [
                     { required: true, message: "请输入手机号" },
                     { pattern: /^1[3-9]\d{9}$/, message: "请输入正确的手机号" },
@@ -66,7 +65,7 @@ export default {
               </Form.Item>
 
               <Form.Item>
-                {getFieldDecorator("password", {
+                {getFieldDecorator("passwd", {
                   rules: [
                     { required: true, message: "请输入密码" },
                     { min: 6, message: "密码长度不能少于6位" },
@@ -93,6 +92,8 @@ export default {
                 </Button>
               </Form.Item>
             </Form>
+
+            <Gt4 ref={"gt4Dom"} onValidated={this.onValidatedSuccess} />
           </div>
         </div>
       </div>

@@ -7,3 +7,7 @@ export const getProfile = (params) => {
 export const customerSearch = (params) => {
   return Http.post("/qcc/kzz/crm/v2/customer/search", params);
 };
+
+export const login = (params) => {
+  return Http.post("/qcc/user/buser/login/passwd", params);
+};

@@ -1,6 +1,7 @@
 import axios from "axios";
 import router from "@/router";
 import { logout } from "@/utils";
+import { message } from "ant-design-vue";
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
@@ -24,6 +25,10 @@ service.interceptors.response.use(
           if (router.currentRoute.meta.needLogin !== 0) {
             logout();
           }
+          return;
+        case 400:
+          console.warn("400: 请求参数错误");
+          message.warning("请求参数错误");
           return;
         default:
           console.warn(`HTTP ${status}: 请求失败`);

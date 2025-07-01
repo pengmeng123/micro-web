@@ -64,7 +64,7 @@ export default {
       window.microApp?.dispatch({
         type: "viewCustomerDetail",
         data: record,
-        url: "http://localhost:5003/customer-detail",
+        url: "http://z.local.greatld.com:5003/customer-detail",
       });
     },
   },
