@@ -15,3 +15,17 @@ export const deleteCustomer = (customerId) => {
 export const getPersonalDetail = (userId) => {
   return Http.get(`/qcc/kzz/crm/dashboard/userInfo/${userId}`, {});
 };
+
+export const getTrackingReplyList = () => {
+  return Http.get(
+    `/qcc/kzz/crm/v2/trackingReply/replyList/1731125?pageIndex=1&pageSize=10`,
+    {}
+  );
+};
+
+export const likeAction = (id, params) => {
+  return Http.post(
+    `/qcc/kzz/crm/v2/trackingReply/replyLike/1731125/${id}`,
+    params
+  );
+};

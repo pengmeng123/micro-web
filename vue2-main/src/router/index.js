@@ -5,6 +5,7 @@ import Login from "../views/Login";
 import Customer from "../views/Customer";
 import Opportunity from "../views/Opportunity";
 import Contact from "../views/Contact";
+import Comment from "../views/Comment";
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,14 @@ const routes = [
     path: "/contact",
     name: "Contact",
     component: Contact,
+    meta: {
+      layout: "default",
+    },
+  },
+  {
+    path: "/comment",
+    name: "Comment",
+    component: Comment,
     meta: {
       layout: "default",
     },

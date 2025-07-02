@@ -11,3 +11,7 @@ export const customerSearch = (params) => {
 export const login = (params) => {
   return Http.post("/qcc/user/buser/login/passwd", params);
 };
+
+export const getMessageNum = () => {
+  return Http.get("/qcc/kzz/crm/app/message/type/messageNum?oldMsg=1");
+};

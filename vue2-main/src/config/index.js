@@ -26,12 +26,19 @@ export const menuOptions = [
     title: "商机管理",
     path: "/opportunity",
   },
+  {
+    key: "comment",
+    icon: "message",
+    title: "评论管理",
+    path: "/comment",
+  },
 ];
 
 export const nameMap = {
   customer: "客户管理",
   contact: "联系人管理",
   opportunity: "商机管理",
+  comment: "评论管理",
 };
 
 export const MICRO_MAPPER = {

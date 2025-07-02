@@ -6,12 +6,10 @@ import { logout } from "@/utils";
 export default {
   name: "PageHeader",
   data() {
-    return {
-      messageCount: 5, // 消息数量，实际应用中可能从API获取
-    };
+    return {};
   },
   computed: {
-    ...mapState(["profile"]),
+    ...mapState(["profile", "messageNum"]),
     isLoggedIn() {
       return !!this.profile?.userId;
     },
@@ -69,7 +67,7 @@ export default {
             <div class={styles.userSection}>
               {/* 消息按钮 */}
               <Badge
-                count={this.messageCount}
+                count={this.messageNum}
                 overflowCount={99}
                 style={{ marginRight: "20px", cursor: "pointer" }}
               >

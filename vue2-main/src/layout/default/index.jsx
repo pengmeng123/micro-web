@@ -1,9 +1,10 @@
 import styles from "./index.module.less";
 import Header from "@/components/Header";
 import { Layout, Menu, Icon } from "ant-design-vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import { menuOptions, nameMap } from "@/config";
 import { PromiseDialogsWrapper } from "vue-promise-dialogs";
+import SocketClient from "@/utils/socket-client";
 
 export default {
   name: "DefaultLayout",
@@ -44,7 +45,17 @@ export default {
     },
   },
 
+  mounted() {
+    this.startWorker();
+    this.fetchMessageNum?.();
+  },
+
   methods: {
+    ...mapActions(["fetchMessageNum"]),
+    startWorker() {
+      this.socket = new SocketClient(this);
+      this.socket.start();
+    },
     toggleCollapsed() {
       this.collapsed = !this.collapsed;
     },
