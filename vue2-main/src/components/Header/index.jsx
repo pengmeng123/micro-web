@@ -59,7 +59,8 @@ export default {
       <div class={styles.header}>
         <div class={styles.logo} onClick={this.goToHome}>
           <Icon type="apartment" style="font-size: 24px; margin-right: 8px;" />
-          <span class={styles.title}>Micro-App 框架演示</span>
+          {/* <span class={styles.title}>Micro-App 框架演示</span> */}
+          <span class={styles.title}>xx</span>
         </div>
 
         <div class={styles.action}>

@@ -81,7 +81,8 @@ export default {
                 title: "客户详情",
                 iframe: true,
                 customerId: record.customerId,
-                microName: MICRO_MAPPER.VUE3_VITE_CHILD.name,
+                microName:
+                  MICRO_MAPPER.VUE3_VITE_CHILD.name + "-customer-detail",
                 microUrl: `${MICRO_MAPPER.VUE3_VITE_CHILD.host}/customer-detail`,
                 refresh: () => {
                   this.fetchCustomers();
@@ -121,7 +122,9 @@ export default {
                           width: 400,
                           iframe: true,
                           userId: v.userId,
-                          microName: MICRO_MAPPER.VUE3_VITE_CHILD.name,
+                          microName:
+                            MICRO_MAPPER.VUE3_VITE_CHILD.name +
+                            "-personal-detail",
                           microUrl: `${MICRO_MAPPER.VUE3_VITE_CHILD.host}/personal-detail`,
                         });
                       }}
