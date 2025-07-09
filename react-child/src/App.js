@@ -11,17 +11,19 @@ function App() {
   return (
     <Router>
       <div>
-        <Alert
-          type="warning"
-          message={
-            <div className="appTip">
-              <MicroImage width={40} src={logo} />
-              这是react-child子应用
-            </div>
-          }
-        >
-          <div>这是警告信息</div>
-        </Alert>
+        {window.__MICRO_APP_ENVIRONMENT__ ? (
+          <Alert
+            type="warning"
+            message={
+              <div className="appTip">
+                <MicroImage width={40} src={logo} />
+                这是react-child子应用
+              </div>
+            }
+          >
+            <div>这是警告信息</div>
+          </Alert>
+        ) : null}
 
         <AppRoutes />
       </div>

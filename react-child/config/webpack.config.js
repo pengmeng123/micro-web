@@ -751,9 +751,16 @@ module.exports = function (webpackEnv) {
     // our own hints via the FileSizeReporter
     performance: false,
     devServer: {
-      port: 5002,
+      allowedHosts: ["z.test.greatld.com", "z.local.greatld.com"],
       headers: {
         "Access-Control-Allow-Origin": "*",
+      },
+      proxy: {
+        "^/qcc": {
+          target: "http://z.test.greatld.com",
+          changeOrigin: true,
+          xfwd: false,
+        },
       },
     },
   };
