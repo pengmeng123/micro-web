@@ -750,18 +750,5 @@ module.exports = function (webpackEnv) {
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
-    devServer: {
-      allowedHosts: ["z.test.greatld.com", "z.local.greatld.com"],
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-      proxy: {
-        "^/qcc": {
-          target: "http://z.test.greatld.com",
-          changeOrigin: true,
-          xfwd: false,
-        },
-      },
-    },
   };
 };

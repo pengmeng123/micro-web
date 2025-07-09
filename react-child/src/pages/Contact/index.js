@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table, Card, Badge, Button, Alert, message } from "antd";
-import { contactSearch } from "../../services/api";
+import { contactSearch, getAreaList } from "../../services/api";
 import { openDrawerDetail } from "../../utils/drawer";
 
 function Contact() {
@@ -16,8 +16,14 @@ function Contact() {
 
   useEffect(() => {
     fetchContacts();
+    fetchAreaList();
   }, []);
 
+  const fetchAreaList = () => {
+    getAreaList().then((res) => {
+      console.log(res);
+    });
+  };
   const fetchContacts = () => {
     setLoading(true);
     return contactSearch({

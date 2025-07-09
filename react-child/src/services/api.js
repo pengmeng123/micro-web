@@ -36,6 +36,10 @@ export const contactSearch = (params) => {
   return instance.post("/qcc/kzz/crm/v2/contact/search", params);
 };
 
+export const getAreaList = (params) => {
+  return instance.get("/qcc/kzz/schemas/areaList", params);
+};
+
 // 模拟联系人数据
 const mockContactData = (params) => {
   const { pageIndex, pageSize } = params;
