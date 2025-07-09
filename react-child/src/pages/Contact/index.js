@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Card, Badge, Button, Alert, message } from "antd";
 import { contactSearch, getAreaList } from "../../services/api";
 import { openDrawerDetail } from "../../utils/drawer";
+import Cookies from "js-cookie";
 
 function Contact() {
   const [loading, setLoading] = useState(false);
@@ -15,13 +16,29 @@ function Contact() {
   });
 
   useEffect(() => {
+    // 设置 cookie 到正确的域名
+    const sessionId = "0bd1120e916544afb4571a7cfa222757";
+
+    // 尝试多种方式设置 cookie
+    Cookies.set("CRMSESSID", sessionId, {
+      domain: ".greatld.com",
+      path: "/",
+    });
+
+    // 直接设置到当前域名
+    document.cookie = `CRMSESSID=${sessionId}; path=/; domain=.greatld.com`;
+    document.cookie = `CRMSESSID=${sessionId}; path=/`;
+
+    console.log("🍪 设置 cookie 后:", document.cookie);
+    console.log("🔍 Cookies.get('CRMSESSID'):", Cookies.get("CRMSESSID"));
+
     fetchContacts();
     fetchAreaList();
   }, []);
 
   const fetchAreaList = () => {
     getAreaList().then((res) => {
-      console.log(res);
+      // console.log(res);
     });
   };
   const fetchContacts = () => {

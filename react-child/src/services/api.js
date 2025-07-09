@@ -4,6 +4,7 @@ import axios from "axios";
 const instance = axios.create({
   baseURL: "/",
   timeout: 10000,
+  withCredentials: true, // 关键配置：确保 Cookie 传递
   headers: {
     "Content-Type": "application/json",
   },
