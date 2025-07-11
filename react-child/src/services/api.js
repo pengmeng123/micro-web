@@ -34,11 +34,11 @@ instance.interceptors.response.use(
 
 // 联系人搜索API
 export const contactSearch = (params) => {
-  return instance.post("/qcc/kzz/crm/v2/contact/search", params);
+  return instance.post("/api/qcc/kzz/crm/v2/contact/search", params);
 };
 
 export const getAreaList = (params) => {
-  return instance.get("/qcc/kzz/schemas/areaList", params);
+  return instance.get("/api/qcc/kzz/schemas/areaList", params);
 };
 
 // 模拟联系人数据
