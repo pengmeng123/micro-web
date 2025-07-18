@@ -46,4 +46,8 @@ export const MICRO_MAPPER = {
     name: "vue3-vite-child",
     host: "http://z.local.greatld.com:5003",
   },
+  REACT_CHILD: {
+    name: "react-child",
+    host: "http://z.local.greatld.com:5002",
+  },
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table, Card, Badge, Button, Alert, message } from "antd";
-import { contactSearch, getAreaList } from "../../services/api";
+import { contactSearch } from "../../services/api";
 import { openDrawerDetail } from "../../utils/drawer";
 import Cookies from "js-cookie";
 
@@ -16,31 +16,9 @@ function Contact() {
   });
 
   useEffect(() => {
-    // 设置 cookie 到正确的域名
-    const sessionId = "0bd1120e916544afb4571a7cfa222757";
-
-    // 尝试多种方式设置 cookie
-    Cookies.set("CRMSESSID", sessionId, {
-      domain: ".greatld.com",
-      path: "/",
-    });
-
-    // 直接设置到当前域名
-    document.cookie = `CRMSESSID=${sessionId}; path=/; domain=.greatld.com`;
-    document.cookie = `CRMSESSID=${sessionId}; path=/`;
-
-    console.log("🍪 设置 cookie 后:", document.cookie);
-    console.log("🔍 Cookies.get('CRMSESSID'):", Cookies.get("CRMSESSID"));
-
     fetchContacts();
-    fetchAreaList();
-  }, []);
+  }, [pagination.current]);
 
-  const fetchAreaList = () => {
-    getAreaList().then((res) => {
-      // console.log(res);
-    });
-  };
   const fetchContacts = () => {
     setLoading(true);
     return contactSearch({
@@ -75,13 +53,7 @@ function Contact() {
     setPagination({
       ...pagination,
       current: paginationConfig.current,
-      pageSize: paginationConfig.pageSize,
     });
-
-    // 使用新的分页参数获取数据
-    setTimeout(() => {
-      fetchContacts();
-    }, 0);
   };
 
   const handleViewDetail = (record) => {
@@ -101,7 +73,7 @@ function Contact() {
 
   const columns = [
     {
-      title: "联系人姓名",
+      title: "姓名",
       dataIndex: "name",
       key: "name",
       width: 200,
@@ -110,9 +82,7 @@ function Contact() {
       ),
     },
     {
-      title: "所属客户",
-      dataIndex: "customerName",
-      key: "customerName",
+      title: "对应客户",
       width: 200,
       render: (text, record) => (
         <a
@@ -129,7 +99,7 @@ function Contact() {
             });
           }}
         >
-          {text || "-"}
+          {record?.customer?.name || "-"}
         </a>
       ),
     },
@@ -137,13 +107,6 @@ function Contact() {
       title: "职位",
       dataIndex: "position",
       key: "position",
-      width: 150,
-      render: (text) => text || "-",
-    },
-    {
-      title: "手机号码",
-      dataIndex: "mobile",
-      key: "mobile",
       width: 150,
       render: (text) => text || "-",
     },
@@ -156,50 +119,28 @@ function Contact() {
     },
     {
       title: "备注",
-      dataIndex: "note",
-      key: "note",
+      dataIndex: "comment",
+      key: "comment",
       render: (text) => text || "-",
     },
   ];
 
   return (
-    <div style={{ padding: "20px" }}>
-      <Alert
-        message="这是React子应用的联系人管理列表"
-        banner
-        style={{ marginBottom: "15px" }}
-      />
+    <div>
+      <Alert message="这是React子应用的联系人管理列表" banner />
 
-      <Card bordered={false} style={{ marginBottom: "16px" }}>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button type="primary" onClick={handleSearch}>
-            刷新
-          </Button>
-        </div>
-      </Card>
-
-      <Card bordered={false}>
+      <Card bordered={false} style={{ boxShadow: "none" }}>
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "16px",
+            padding: "16px 0",
             borderBottom: "1px solid #f0f0f0",
           }}
         >
           <div style={{ fontSize: "16px", fontWeight: 500 }}>
-            <Badge status="processing" text="联系人列表" />
-            <span
-              style={{
-                fontSize: "14px",
-                color: "rgba(0, 0, 0, 0.45)",
-                marginLeft: "12px",
-                fontWeight: "normal",
-              }}
-            >
-              共 {pagination.total} 条记录
-            </span>
+            <span>共 {pagination.total} 条记录</span>
           </div>
         </div>
 
