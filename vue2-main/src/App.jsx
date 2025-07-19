@@ -1,6 +1,4 @@
-import Cookies from "js-cookie";
-import { CRMSESSID, LAYOUT_MAPPING } from "@/config";
-import microApp from "@micro-zoe/micro-app";
+import { LAYOUT_MAPPING } from "@/config";
 import { mapActions } from "vuex";
 import PageLoading from "@/components/Loading";
 import zhCN from "ant-design-vue/lib/locale-provider/zh_CN";
@@ -10,14 +8,6 @@ export default {
     return {
       isLoading: true,
     };
-  },
-  created() {
-    const token = Cookies.get(CRMSESSID);
-    if (token) {
-      microApp.setGlobalData({
-        token,
-      });
-    }
   },
 
   mounted() {

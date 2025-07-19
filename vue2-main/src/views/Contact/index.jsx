@@ -10,7 +10,6 @@ export default {
           clear-data
           name={MICRO_MAPPER.REACT_CHILD.name + "-contact"}
           url={`${MICRO_MAPPER.REACT_CHILD.host}/contact`}
-          disable-memory-router
         ></micro-app>
       </div>
     );

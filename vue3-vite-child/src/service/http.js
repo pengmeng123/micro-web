@@ -1,5 +1,4 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 
 const service = axios.create({
   baseURL: "/", // url = base url + request url
@@ -22,7 +21,6 @@ service.interceptors.response.use(
         case 401:
           // 通知主应用跳转到登录页
           if (window.microApp) {
-            Cookies.remove("CRMSESSID");
             window.microApp.dispatch({
               type: "jump-to-login",
             });

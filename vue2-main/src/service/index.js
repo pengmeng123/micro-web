@@ -15,3 +15,7 @@ export const login = (params) => {
 export const getMessageNum = () => {
   return Http.get("/qcc/kzz/crm/app/message/type/messageNum?oldMsg=1");
 };
+
+export const handleLogout = () => {
+  return Http.get("/qcc/user/buser/logout");
+};

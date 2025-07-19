@@ -1,9 +1,7 @@
-import Cookies from "js-cookie";
-import { CRMSESSID } from "@/config";
-import microApp from "@micro-zoe/micro-app";
+import { handleLogout } from "@/service";
 
 export const logout = () => {
-  microApp.setGlobalData({ token: "" });
-  Cookies.remove(CRMSESSID);
-  window.location.href = "/login";
+  handleLogout().then(() => {
+    window.location.href = "/login";
+  });
 };

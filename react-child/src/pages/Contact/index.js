@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Table, Card, Badge, Button, Alert, message } from "antd";
+import { Table, Card, Alert, message } from "antd";
 import { contactSearch } from "../../services/api";
 import { openDrawerDetail } from "../../utils/drawer";
-import Cookies from "js-cookie";
 
 function Contact() {
   const [loading, setLoading] = useState(false);

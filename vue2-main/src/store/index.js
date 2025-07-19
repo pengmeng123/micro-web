@@ -27,7 +27,6 @@ export default new Vuex.Store({
     },
     fetchMessageNum({ commit }) {
       return getMessageNum().then((res) => {
-        console.log(res);
         const arr = res.data
           .filter((v) => {
             return [19, 44, 64].includes(+v.type);

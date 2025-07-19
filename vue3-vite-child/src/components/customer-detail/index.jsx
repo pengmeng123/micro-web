@@ -4,7 +4,6 @@ import CustomerTab from "./customer-tab";
 import ContractTab from "./contract-tab";
 import styles from "./index.module.less";
 import { customerDetail } from "@/service";
-import Cookies from "js-cookie";
 
 const TAB_OPTIONS = [
   {
