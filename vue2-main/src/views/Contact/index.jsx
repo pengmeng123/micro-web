@@ -7,7 +7,6 @@ export default {
     return (
       <div class={styles.container}>
         <micro-app
-          clear-data
           name={MICRO_MAPPER.REACT_CHILD.name + "-contact"}
           url={`${MICRO_MAPPER.REACT_CHILD.host}/contact`}
         ></micro-app>
