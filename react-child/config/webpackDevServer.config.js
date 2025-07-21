@@ -33,9 +33,7 @@ module.exports = function (proxy, allowedHost) {
     // really know what you're doing with a special environment variable.
     // Note: ["localhost", ".localhost"] will support subdomains - but we might
     // want to allow setting the allowedHosts manually for more complex setups
-    allowedHosts: disableFirewall
-      ? "all"
-      : [allowedHost, "z.test.greatld.com", "z.local.greatld.com"],
+    allowedHosts: ["z.test.greatld.com", "z.local.greatld.com"],
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "*",
@@ -102,6 +100,28 @@ module.exports = function (proxy, allowedHost) {
     // `proxy` is run between `before` and `after` `webpack-dev-server` hooks
     proxy,
     onBeforeSetupMiddleware(devServer) {
+      // 添加跨域中间件，处理 OPTIONS 请求和设置 CORS headers
+      devServer.app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", [
+          "http://z.local.greatld.com:5000",
+        ]);
+        res.header("Access-Control-Allow-Credentials", "true");
+        res.header(
+          "Access-Control-Allow-Methods",
+          "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+        );
+        res.header(
+          "Access-Control-Allow-Headers",
+          "DNT, X-Mx-ReqToken, Keep-Alive, X-Requested-With, If-Modified-Since, Cache-Control, Content-Type, Authorization, token"
+        );
+
+        if (req.method === "OPTIONS") {
+          res.sendStatus(200);
+          return;
+        }
+
+        next();
+      });
       // Keep `evalSourceMapMiddleware`
       // middlewares before `redirectServedPath` otherwise will not have any effect
       // This lets us fetch source contents from webpack for the error overlay
